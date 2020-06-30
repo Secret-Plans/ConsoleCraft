@@ -1,0 +1,19 @@
+{
+    "0": {
+        "name": "Air",
+        "char": " ",
+        "colour": "gray"
+    },
+
+    "1": {
+        "name": "Rock",
+        "char": "#",
+        "colour": "gray"
+    },
+    
+    "2": {
+        "name": "Rock Wall",
+        "char": ".",
+        "colour": "gray"
+    }
+}

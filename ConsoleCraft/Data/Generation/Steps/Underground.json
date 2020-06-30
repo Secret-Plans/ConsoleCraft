@@ -1,0 +1,10 @@
+{
+    "root": [
+        {
+            "type": "terrain",
+            "start": 5,
+            "end": 999,
+            "tile": 1
+        }
+    ]
+}
