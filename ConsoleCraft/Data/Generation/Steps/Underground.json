@@ -2,8 +2,8 @@
     "root": [
         {
             "type": "terrain",
-            "start": 5,
-            "end": 999,
+            "start": 2000,
+            "end": 9999,
             "tile": 1
         }
     ]
