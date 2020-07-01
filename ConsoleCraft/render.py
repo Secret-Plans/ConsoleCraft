@@ -35,7 +35,13 @@ def set_colour(colour : str) -> None:
         "white": (37, 1)
     }
 
-    sys.stdout.write(f"\033[{colours[colour][1]};{colours[colour][0]}m")
+    return f"\033[{colours[colour][1]};{colours[colour][0]}m"
+
+
+def clear_line(line : int) -> None:
+    set_cursor(1, line)
+    print(" " * 120)
+    set_cursor(1, line)
 
 
 def set_cursor(x : int, y : int) -> None:
@@ -47,11 +53,21 @@ def print_at(x : int, y : int, msg : str) -> None:
     print(msg)
 
 
-def print_map(world : World, camera : Entity) -> None:
+def print_map(world : World, entities : list, camera : Entity) -> None:
     for y in range(20):
+        actual_y = y + camera.y - 10
         line = ""
         for x in range(80):
-            tile_data = world.get_tile_data(x + camera.x, y + camera.y)
-            set_colour(tile_data["colour"])
-            line += tile_data["char"]
+            actual_x = x + camera.x - 40
+            no_entity_on_tile = True
+            for entity in entities:
+                if actual_x == entity.x and actual_y == entity.y and entity.visible:
+                    no_entity_on_tile = False
+                    line += set_colour(entity.colour)
+                    line += entity.char
+                    break
+            if no_entity_on_tile:
+                tile_data = world.get_tile_data(actual_x, actual_y)
+                line += set_colour(tile_data["colour"])
+                line += tile_data["char"]
         print_at(1, y + 1, line)
