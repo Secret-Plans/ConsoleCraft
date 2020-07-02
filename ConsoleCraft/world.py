@@ -9,7 +9,7 @@ class World:
     seed = 0
 
 
-    def __init__(self, width : int, height : int, tileset_data : dict, generation_steps : dict) -> None:
+    def __init__(self, width : int, height : int, tileset_data : dict) -> None:
         self.width = width
         self.height = height
         self.tileset_data = tileset_data
@@ -18,10 +18,10 @@ class World:
 
 
         print("Generating World")
-        self.generate(generation_steps)
+        self.generate()
     
 
-    def generate(self, steps : dict) -> None:
+    def generate(self) -> None:
         # Generate Heightmap
         print("Generating Heightmap")
         noise = opensimplex.OpenSimplex(self.seed)
@@ -52,3 +52,8 @@ class World:
 
     def set_tile(self, x : int, y : int, index : int) -> None:
         self.tiles[x][y] = index
+    
+
+    def get_collision(self, x : int, y : int, direction) -> bool:
+        if self.get_tile_data(x, y)["collides"]:
+            pass
