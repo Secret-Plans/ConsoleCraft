@@ -2,5 +2,8 @@
     "name": "human",
     "visible": true,
     "char": "@",
-    "colour": "green"
+    "colour": "green",
+    "moves": true,
+    "climbs": true,
+    "falls": true
 }
