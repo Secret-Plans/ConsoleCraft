@@ -1,13 +1,16 @@
 from world import World
 
 class Entity:
+    player_controlled = False
     x = 0
     y = 0
     visible = False
     moves = False
 
 
-    def __init__(self, data : dict) -> None:
+    def __init__(self, data : dict, player_controlled : bool = False) -> None:
+        self.player_controlled = player_controlled
+
         if data["visible"]:
             self.visible = True
             self.char = data["char"]
@@ -18,18 +21,20 @@ class Entity:
             self.falls = True
     
 
-    def move(self, direction : str, amount : int, world : World):
-        velocity = [0, 0] #vector2d: x, y
-        
-        # Evaluate direction
-        if direction == "left":
-            velocity[0] = -1 * amount
-        elif direction == "right":
-            velocity[0] = 1 * amount
+    def move(self, direction : str, world : World) -> None:
+        if direction == "left" or direction == "right":
+            x = {"left": -1, "right": 1}[direction]
+            if not world.does_collide(self.x + x, y):
+                self.x += x
+            elif self.climbs and self.y > 0:
+                if not world.does_collide(self.x + x, self.y - 1):
+                    self.x += x
+                    self.y -= 1
         elif direction == "up":
-            velocity[1] = -1 * amount
-        elif direction == "down":
-            velocity[1] = 1 * amount
-        
-        if falls:
             pass
+        elif direction == "down":
+            pass
+    
+
+    def tick(self, world : World) -> None:
+        pass
