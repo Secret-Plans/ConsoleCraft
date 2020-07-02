@@ -63,26 +63,14 @@ for filename in os.listdir(_dir):
         entity_data[data["name"]] = data
 
 
-# Loading Generation Steps
-generation_steps = {
-    "terrain": []
-}
-_dir = "Data/Generation/Steps"
-for filename in os.listdir(_dir):
-    with open(os.path.join(_dir, filename), "r") as f:
-        data = json.load(f)
-        for item in data["root"]:
-            if item["type"] == "terrain":
-                generation_steps["terrain"].append(item)
-
-
 # Initializing World and Player
 print("Initializing World")
-world = World(2000, 2000, tileset_data, generation_steps)
+world = World(2000, 2000, tileset_data)
 player = Entity(entity_data["human"])
 player.x = world.width // 2
 while not world.get_tile_data(player.x, player.y + 1)["collides"]:
     player.y += 1
+
 
 print("Running Main Loop")
 main_loop(world, player)
