@@ -4,14 +4,20 @@
         "char": " ",
         "colour": "gray",
         "collides": false,
-        "climb": false
+        "climbable": false
     },
 
     "1": {
         "name": "Rock",
         "char": "#",
         "colour": "gray",
-        "collides": true
+        "collides": true,
+        "collision": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+        }
     },
     
     "2": {
@@ -19,6 +25,19 @@
         "char": ".",
         "colour": "gray",
         "collides": false,
-        "climb": false
+        "climbable": false
+    },
+
+    "3": {
+        "name": "Platform",
+        "char": "-",
+        "colour": "brown",
+        "collides": true,
+        "collision": {
+            "top": true,
+            "bottom": true,
+            "left": true,
+            "right": true
+        }
     }
 }
