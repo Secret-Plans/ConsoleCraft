@@ -78,9 +78,9 @@ for filename in os.listdir(_dir):
 
 # Initializing World and Player
 print("Initializing World")
-world = World(10000, 10000, tileset_data, generation_steps)
+world = World(2000, 2000, tileset_data, generation_steps)
 player = Entity(entity_data["human"])
-player.x = 5000
+player.x = world.width // 2
 while not world.get_tile_data(player.x, player.y + 1)["collides"]:
     player.y += 1
 
