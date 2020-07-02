@@ -48,6 +48,10 @@ def set_cursor(x : int, y : int) -> None:
     sys.stdout.write(f"\033[{y};{x}H")
 
 
+def print_and_back(msg : str) -> None:
+    sys.stdout.write(f"{msg}\r")
+
+
 def print_at(x : int, y : int, msg : str) -> None:
     set_cursor(x, y)
     print(msg)
