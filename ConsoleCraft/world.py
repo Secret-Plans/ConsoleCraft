@@ -1,10 +1,12 @@
-
+import opensimplex
+import render
 
 class World:
     width = 10000
     height = 10000
     tiles = [[0]]
     tileset_data = {}
+    seed = 0
 
 
     def __init__(self, width : int, height : int, tileset_data : dict, generation_steps : dict) -> None:
@@ -20,10 +22,24 @@ class World:
     
 
     def generate(self, steps : dict) -> None:
-        for step in steps["terrain"]:
-            for y in range(step["start"], step["end"]):
-                for x in range(self.width):
-                    self.set_tile(x, y, step["tile"])
+        # Generate Heightmap
+        print("Generating Heightmap")
+        noise = opensimplex.OpenSimplex(self.seed)
+        for x in range(self.width):
+            render.print_and_back(f"x = {x}")
+            y = int(noise.noise2d(x / 10, 1) * 5) + self.height // 2
+            while y < self.height - 1:
+                self.set_tile(x, y, 1)
+                y += 1
+        
+        # Generate Caves
+        print("Generating Caves")
+        noise = opensimplex.OpenSimplex(self.seed + 1)
+        for x in range(self.width):
+            render.print_and_back(f"x = {x}")
+            for y in range(0, self.height):
+                if noise.noise2d(x / 10, y / 10) > 0.5:
+                    self.set_tile(x, y, 0)
 
 
     def get_tile_index(self, x : int, y : int) -> int:
