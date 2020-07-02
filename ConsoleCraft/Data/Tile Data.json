@@ -3,7 +3,8 @@
         "name": "Air",
         "char": " ",
         "colour": "gray",
-        "collides": false
+        "collides": false,
+        "climb": false
     },
 
     "1": {
@@ -17,6 +18,7 @@
         "name": "Rock Wall",
         "char": ".",
         "colour": "gray",
-        "collides": false
+        "collides": false,
+        "climb": false
     }
 }
