@@ -1,0 +1,7 @@
+{
+    "copper": {
+        "tile": 1,
+        "depth": 0,
+        "threshold": 0.5
+    }
+}
