@@ -1,5 +1,6 @@
 # Imports
 import os
+import random
 import json
 import render
 from world import World
@@ -17,20 +18,18 @@ def main_loop(world : World, player : Entity):
 
 
 def handle_inputs(user_input : str, player : Entity, world : World):
+    move_direction = ""
     if user_input == "w":
-        if player.y > 0 and not world.get_tile_data(player.x, player.y - 1)["collides"]:
-            player.y -= 1
+        move_direction = "up"
     elif user_input == "a":
-        if player.x > 0 and not world.get_tile_data(player.x - 1, player.y)["collides"]:
-            player.x -= 1
+        move_direction = "left"
     elif user_input == "s":
-        if player.y < world.height - 1 and not world.get_tile_data(player.x, player.y + 1)["collides"]:
-            player.y += 1
+        move_direction = "down"
     elif user_input == "d":
-        if player.x < world.width - 1 and not world.get_tile_data(player.x + 1, player.y)["collides"]:
-            player.x += 1
-    elif user_input == "e":
-        world.set_tile(player.x, player.y, 1)
+        move_direction = "right"
+    
+    if move_direction != "":
+        player.move(move_direction, world)
     
     return player, world
 
@@ -54,6 +53,13 @@ with open(_dir, "r") as f:
     tileset_data = json.load(f)
 
 
+# Loading Ores
+ores = {}
+_dir = "Data/Ores.json"
+with open(_dir, "r") as f:
+    ores = json.load(f)
+
+
 # Loading Entities
 entity_data = {}
 _dir = "Data/Entities"
@@ -65,7 +71,7 @@ for filename in os.listdir(_dir):
 
 # Initializing World and Player
 print("Initializing World")
-world = World(2000, 2000, tileset_data)
+world = World(1000, 1000, random.randint(1, 10000), tileset_data, ores)
 player = Entity(entity_data["human"])
 player.x = world.width // 2
 while not world.get_tile_data(player.x, player.y + 1)["collides"]:
