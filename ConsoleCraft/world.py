@@ -60,9 +60,10 @@ class World:
         for x in range(self.width):
             if random.randint(1, 100) > 50:
                 y = 0
-                while self.get_tile_index(x, y + 1) != 1:
+                while self.get_tile_index(x, y + 1) == 0:
                     y += 1
-                self.set_tile(x, y, 5)
+                if self.get_tile_index(x, y + 1) == 1:
+                    self.set_tile(x, y, 5)
 
 
     def get_tile_index(self, x : int, y : int) -> int:
