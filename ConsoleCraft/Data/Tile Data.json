@@ -11,13 +11,7 @@
         "name": "Rock",
         "char": "#",
         "colour": "gray",
-        "collides": true,
-        "collision": {
-            "top": true,
-            "bottom": true,
-            "left": true,
-            "right": true
-        }
+        "collides": true
     },
     
     "2": {
@@ -29,15 +23,23 @@
     },
 
     "3": {
-        "name": "Platform",
-        "char": "-",
-        "colour": "brown",
-        "collides": true,
-        "collision": {
-            "top": true,
-            "bottom": true,
-            "left": true,
-            "right": true
-        }
+        "name": "Copper Ore",
+        "char": "#",
+        "colour": "yellow",
+        "collides": true
+    },
+
+    "4": {
+        "name": "Iron Ore",
+        "char": "#",
+        "colour": "dark gray",
+        "collides": true
+    },
+
+    "5": {
+        "name": "Grass",
+        "char": ",",
+        "colour": "bright green",
+        "collides": false
     }
 }
